@@ -1,7 +1,7 @@
 node {
     docker.image('node:16-buster-slim').withRun('-p 3000:3000') {
         stage('Setup') {
-            steps {
+            script {
                 sh 'apt-get update && apt-get install -y curl'
                 sh 'curl -sL https://deb.nodesource.com/setup_16.x | bash -'
                 sh 'apt-get install -y nodejs'
@@ -9,12 +9,12 @@ node {
             }
         }
         stage('Build') {
-            steps {
+            script {
                 sh 'npm install'
             }
         }
         stage('Test') {
-            steps {
+            script {
                 sh './jenkins/scripts/test.sh'
             }
         }
