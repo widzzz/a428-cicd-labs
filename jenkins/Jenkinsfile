@@ -19,17 +19,18 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Manual Approval') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-                input message: 'Lanjutkan ke tahap Deploy??'
-                sh './jenkins/scripts/kill.sh'
-            }
-        }
+        // stage('Manual Approval') {
+        //     steps {
+        //         sh './jenkins/scripts/deliver.sh'
+        //         input message: 'Lanjutkan ke tahap Deploy??'
+        //         sh './jenkins/scripts/kill.sh'
+        //     }
+        // }
         stage('Deploy') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
                 sleep(time: 1, unit: 'MINUTES')
+                input message: 'Lanjutkan ke tahap Deploy??'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh './jenkins/scripts/kill.sh'
             }
