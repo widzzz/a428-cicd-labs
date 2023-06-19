@@ -17,8 +17,8 @@ pipeline {
             }
         }
         stage('Sanity check') {
-            steps{
-                input: 'Lanjutkan ke tahap Deploy??'
+            steps {
+                input message: 'Lanjutkan ke tahap Deploy??'
             }
         }
         stage('Deploy') {
