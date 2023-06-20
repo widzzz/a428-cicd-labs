@@ -25,8 +25,19 @@ pipeline {
                 }
             }
             steps {
-                sh "apt install sshpass"
-                sh "sshpass -p 'carikanD4' ssh widzzz@103.176.79.100 'pwd'"
+                // Use expect to SSH into the server
+                sh '#!/usr/bin/expect'
+                sh 'set timeout 10'
+                sh 'spawn ssh widzzz@103.176.79.100'
+                sh 'expect "password:"'
+                sh 'send "carikanD4\n"'
+                sh 'expect "~$"'
+
+                // Run the pwd command
+                send "pwd\n"
+
+                // Exit the expect script
+                expect eof
             }
         }
     }
