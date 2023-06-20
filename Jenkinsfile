@@ -20,14 +20,17 @@ pipeline {
         }
         stage('Deploy') {
             agent { label 'dicoding-practice' }
-            steps {
-                // Use the same Docker image as in the Build and Test stage
-                docker {
-                    image 'node:lts-buster-slim'
-                    args '-p 3000:3000'
-                }
-                steps {
-                    sh './jenkins/scripts/deliver.sh'
+            stages {
+                stage('Run deploy script') {
+                    agent {
+                        docker {
+                            image 'node:lts-buster-slim'
+                            args '-p 3000:3000'
+                        }
+                    }
+                    steps {
+                        sh './jenkins/scripts/deliver.sh'
+                    }
                 }
             }
         }
