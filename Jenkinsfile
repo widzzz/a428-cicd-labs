@@ -29,7 +29,7 @@ pipeline {
                         echo "Failed to remove Docker containers: ${e.getMessage()}"
                     } finally {
                         sh 'docker build -t react-app .'
-                        sh 'docker run -it -p 3000:3000'
+                        sh 'docker run -it -p 3000:3000 react-app'
                         sleep time: 1, unit: 'MINUTES'
                     }
                 }
