@@ -19,7 +19,7 @@ pipeline {
             }
         }
         stage('Deploy') {
-            agent { label 'built-in' }
+            agent { label 'dicoding-practice' }
             steps {
                 sh "whoami"
                 sh "ssh widzzz@103.176.79.100 'pwd'"
