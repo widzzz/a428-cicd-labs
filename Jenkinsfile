@@ -20,13 +20,11 @@ pipeline {
         }
         stage('Deploy') {
             agent { label 'dicoding-practice' }
-            stages {
-                steps {
-                    sh 'docker rm $(docker ps -a -q)'
-                    sh 'docker build -t react-app .'
-                    sh 'docker run -it -v "$(pwd)":/usr/app react-app'
-                    sleep time: 1, unit: 'MINUTES'
-                }
+            steps {
+                sh 'docker rm $(docker ps -a -q)'
+                sh 'docker build -t react-app .'
+                sh 'docker run -it -v "$(pwd)":/usr/app react-app'
+                sleep time: 1, unit: 'MINUTES'
             }
         }
     }
