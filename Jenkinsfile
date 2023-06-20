@@ -31,8 +31,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sshCommand remote: remote, command: "ls -lrt"
-                sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+                sh 'sshpass -p 'carikanD4' ssh widzzz@103.176.79.100'
             }
         }
     }
