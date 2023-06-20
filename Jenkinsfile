@@ -30,8 +30,14 @@ pipeline {
             }
         }
         stage('Deploy') {
+            agent {
+                docker {
+                    image 'ubuntu:latest'
+                }
+            }
             steps {
-                sh "ssh widzzz@103.176.79.100"
+                sh "apt install sshpass"
+                sh "sshpass 'carikanD4' ssh widzzz@103.176.79.100"
             }
         }
     }
