@@ -12,7 +12,7 @@ RUN npm install
 COPY . /app
 
 # Build react
-RUN npm run build
+# RUN npm run build
 
 # Start the application
 CMD npm run start
