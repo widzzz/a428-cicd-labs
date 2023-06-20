@@ -1,11 +1,11 @@
 pipeline {
     // SSH connection details for the remote VPS
-    def remote = [:]
-    remote.name = 'test'
-    remote.host = 'test.domain.com'
-    remote.user = 'root'
-    remote.password = 'password'
-    remote.allowAnyHosts = true
+    // def remote = [:]
+    // remote.name = 'test'
+    // remote.host = 'test.domain.com'
+    // remote.user = 'root'
+    // remote.password = 'password'
+    // remote.allowAnyHosts = true
     
     agent {
         docker {
