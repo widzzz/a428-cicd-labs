@@ -3,7 +3,7 @@ FROM node:lts-buster-slim
 WORKDIR /usr/react-app
 
 # Mount the react-app volume
-VOLUME .:/usr/
+VOLUME /opt/jenkins/workspace/:/usr/
 
 # Install dependencies
 RUN npm install
