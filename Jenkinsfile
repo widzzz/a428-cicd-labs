@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh "sshpass -p 'carikanD4' ssh widzzz@103.176.79.100"
+                sh "ssh widzzz@103.176.79.100"
             }
         }
     }
