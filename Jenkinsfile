@@ -25,7 +25,8 @@ pipeline {
                 }
             }
             steps {
-                sh "ssh -o PreferredAuthentications=password widzzz@103.176.79.100 'pwd'"
+                sh "su && apt install ssh sshpass"
+                sh "sshpass -p 'carikanD4' ssh widzzz@103.176.79.100 'pwd'"
             }
         }
     }
