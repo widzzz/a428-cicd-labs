@@ -1,4 +1,12 @@
 pipeline {
+    // SSH connection details for the remote VPS
+    def remote = [:]
+    remote.name = 'test'
+    remote.host = 'test.domain.com'
+    remote.user = 'root'
+    remote.password = 'password'
+    remote.allowAnyHosts = true
+    
     agent {
         docker {
             image 'node:lts-buster-slim'
@@ -16,17 +24,15 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Sanity check') {
+        stage('Manual Approval') {
             steps {
-                input message: 'Lanjutkan ke tahap Deploy??'
+                input message: 'Lanjutkan ke tahap Deploy?'
             }
         }
         stage('Deploy') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
-                sleep(time: 1, unit: 'MINUTES')
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
+                sshCommand remote: remote, command: "ls -lrt"
+                sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
             }
         }
     }
