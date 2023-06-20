@@ -27,6 +27,7 @@ pipeline {
         stage('Manual Approval') {
             steps {
                 input message: 'Lanjutkan ke tahap Deploy?'
+                sh 'exit'
             }
         }
         stage('Deploy') {
