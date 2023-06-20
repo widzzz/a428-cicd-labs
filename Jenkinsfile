@@ -21,8 +21,14 @@ pipeline {
         stage('Deploy') {
             agent { label 'dicoding-practice' }
             steps {
-                sh "whoami"
-                sh "ssh widzzz@103.176.79.100 'pwd'"
+                // Use the same Docker image as in the Build and Test stage
+                docker {
+                    image 'node:lts-buster-slim'
+                    args '-p 3000:3000'
+                }
+                steps {
+                    sh './jenkins/scripts/deliver.sh'
+                }
             }
         }
     }
