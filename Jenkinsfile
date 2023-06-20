@@ -25,19 +25,7 @@ pipeline {
                 }
             }
             steps {
-                // Use expect to SSH into the server
-                sh '#!/usr/bin/expect'
-                sh 'set timeout 10'
-                sh 'spawn ssh widzzz@103.176.79.100'
-                sh 'expect "password:"'
-                sh 'send "carikanD4\n"'
-                sh 'expect "~$"'
-
-                // Run the pwd command
-                send "pwd\n"
-
-                // Exit the expect script
-                expect eof
+                sh "ssh -o PreferredAuthentications=password widzzz@103.176.79.100 'pwd'"
             }
         }
     }
