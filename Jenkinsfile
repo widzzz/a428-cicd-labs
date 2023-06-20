@@ -22,7 +22,7 @@ pipeline {
             agent { label 'built-in' }
             steps {
                 sh "whoami"
-                sh "sshpass -p 'carikanD4' ssh widzzz@103.176.79.100 'pwd'"
+                sh "ssh widzzz@103.176.79.100 'pwd'"
             }
         }
     }
