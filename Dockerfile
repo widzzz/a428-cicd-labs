@@ -1,9 +1,9 @@
 FROM node:lts-buster-slim
 
-WORKDIR /react-app
+WORKDIR /usr/react-app
 
 # Mount the react-app volume
-VOLUME .:/react-app
+VOLUME .:/usr/
 
 # Install dependencies
 RUN npm install
