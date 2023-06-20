@@ -21,16 +21,11 @@ pipeline {
         stage('Deploy') {
             agent { label 'dicoding-practice' }
             stages {
-                stage('Run deploy script') {
-                    agent {
-                        docker {
-                            image 'node:lts-buster-slim'
-                            args '-p 3000:3000'
-                        }
-                    }
-                    steps {
-                        sh './jenkins/scripts/deliver.sh'
-                    }
+                steps {
+                    sh 'docker rm $(docker ps -a -q)'
+                    sh 'docker build -t react-app .'
+                    sh 'docker run -it -v "$(pwd)":/usr/app react-app'
+                    sleep time: 1, unit: 'MINUTES'
                 }
             }
         }
