@@ -25,6 +25,7 @@ pipeline {
                 }
             }
             steps {
+                sh "whoami"
                 sh "su && apt install ssh sshpass"
                 sh "sshpass -p 'carikanD4' ssh widzzz@103.176.79.100 'pwd'"
             }
