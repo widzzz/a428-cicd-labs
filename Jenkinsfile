@@ -37,7 +37,7 @@ pipeline {
             }
             steps {
                 sh "apt install sshpass"
-                sh "sshpass 'carikanD4' ssh widzzz@103.176.79.100"
+                sh "sshpass 'carikanD4' ssh widzzz@103.176.79.100 pwd"
             }
         }
     }
