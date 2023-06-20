@@ -22,10 +22,17 @@ pipeline {
             agent { label 'dicoding-practice' }
             steps {
                 sh 'pwd'
-                sh 'docker rm $(docker ps -a -q)'
-                sh 'docker build -t react-app .'
-                sh 'docker run -it -v /opt/jenkins/workspace/react-app:/usr/app react-app'
-                sleep time: 1, unit: 'MINUTES'
+                script {
+                    try {
+                        sh 'docker rm $(docker ps -a -q)'
+                    } catch (Exception e) {
+                        echo "Failed to remove Docker containers: ${e.getMessage()}"
+                    } finally {
+                        sh 'docker build -t react-app .'
+                        sh 'docker run -it -v /opt/jenkins/workspace/react-app:/usr/app react-app'
+                        sleep time: 1, unit: 'MINUTES'
+                    }
+                }
             }
         }
     }
