@@ -33,7 +33,13 @@ pipeline {
                 sh 'pwd'
                 script {
                     try {
-                        sh 'docker rm $(docker ps -a -q)'
+                        try {
+                            sh 'docker stop $(docker ps -q)'
+                        } catch (Exception e) {
+                            echo "Failed to stop Docker containers: ${e.getMessage()}"
+                        } finally {
+                            sh 'docker rm $(docker ps -a -q)'
+                        }
                     } catch (Exception e) {
                         echo "Failed to remove Docker containers: ${e.getMessage()}"
                     } finally {
