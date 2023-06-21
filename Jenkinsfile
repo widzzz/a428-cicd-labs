@@ -44,9 +44,9 @@ pipeline {
                         echo "Failed to remove Docker containers: ${e.getMessage()}"
                     } finally {
                         sh 'docker build -t react-app .'
-                        sh 'docker run -d -p 3000:3000 react-app'
+                        sh 'docker run -d --network=mynet --ip="10.0.0.2" -p 3000:3000 react-app'
                         sh 'docker build -t my-reverse-proxy ./nginx'
-                        sh 'cd nginx; docker run -d -p 80:80 my-reverse-proxy'
+                        sh 'cd nginx; docker run -d --network=mynet -p 80:80 my-reverse-proxy'
                         sleep time: 1, unit: 'MINUTES'
                     }
                 }
