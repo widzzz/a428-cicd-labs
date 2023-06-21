@@ -45,7 +45,7 @@ pipeline {
                     } finally {
                         sh 'docker build -t react-app .'
                         sh 'docker run -d -p 3000:3000 react-app'
-                        sh 'docker build -t my-reverse-proxy /nginx'
+                        sh 'docker build -t my-reverse-proxy ./nginx'
                         sh 'cd nginx; docker run -d -p 80:80 my-reverse-proxy'
                         sleep time: 1, unit: 'MINUTES'
                     }
