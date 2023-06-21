@@ -1,7 +1,7 @@
 pipeline {
     agent none
     stages {
-        stage() {
+        stage('Local pipeline') {
             agent {
                 docker {
                     image 'node:lts-buster-slim'
@@ -20,7 +20,6 @@ pipeline {
                     }
                 }
             }
-            
         }
         stage('Manual Approval') {
             steps {
