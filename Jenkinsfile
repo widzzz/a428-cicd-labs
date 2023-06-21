@@ -1,17 +1,26 @@
 pipeline {
     agent none
     stages {
-        stage('Build and Test') {
+        stage() {
             agent {
                 docker {
                     image 'node:lts-buster-slim'
                     args '-p 3000:3000'
                 }
             }
-            steps {
-                sh 'npm install'
-                sh './jenkins/scripts/test.sh'
+            stages {
+                stage('Build') {
+                    steps {
+                        sh 'npm install'
+                    }
+                }
+                stage('Test') {
+                    steps {
+                        sh './jenkins/scripts/test.sh'
+                    }
+                }
             }
+            
         }
         stage('Manual Approval') {
             steps {
@@ -19,6 +28,7 @@ pipeline {
             }
         }
         stage('Deploy') {
+            // I add the node in Jenkins
             agent { label 'dicoding-practice' }
             steps {
                 sh 'pwd'
